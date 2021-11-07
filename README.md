@@ -1,6 +1,6 @@
 Tracking a Laser pointer with Python and OpenCV
 
-##Lazer Takip Sistemi
+## Lazer Takip Sistemi
 
 Pixel Tracking görüntü işleme tekniğiyle çalışan bir izleme sistemidir. Şu durumda lazer noktasını takip edebilen bu sistem bir bigisayara bağımlı olarak çalışır durumdadır. Kameradan alınan görüntüler Opencv ile Vs programında işlendikten sonra elde edilen veriler yazılım ile kontrol edilir, aynı şekilde kamera da bilgisayarla iletişimini USB port aracılığıyla yapar, görüntüler hazırlanan yazılımla alınır ve belli aralıklarda fotoğraflar çekilir. Fotoğraf içerisinde istenilen bir değerde görüntü aranmaya başlanır ve aranan değer bulunduğunda belirlenen koordinata kameranın odaklanması sağlanır. Bu işlemler belirli bir algoritma çerçevesinde gerçekleşir. Sistemin çalışma hızı (tepki hızı) burada önemli bir parametredir ve tasarlanan algoritma bu aşamada önem arzeder. 
 OpenCV Kütüphanesi ile Görüntü İşleme
