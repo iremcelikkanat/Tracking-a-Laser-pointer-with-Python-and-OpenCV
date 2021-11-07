@@ -1,22 +1,23 @@
-# Tracking-a-Laser-pointer-with-Python-and-OpenCV
 Tracking a Laser pointer with Python and OpenCV
 
-Lazer Takip Sistemi
+##Lazer Takip Sistemi
 
 Pixel Tracking görüntü işleme tekniğiyle çalışan bir izleme sistemidir. Şu durumda lazer noktasını takip edebilen bu sistem bir bigisayara bağımlı olarak çalışır durumdadır. Kameradan alınan görüntüler Opencv ile Vs programında işlendikten sonra elde edilen veriler yazılım ile kontrol edilir, aynı şekilde kamera da bilgisayarla iletişimini USB port aracılığıyla yapar, görüntüler hazırlanan yazılımla alınır ve belli aralıklarda fotoğraflar çekilir. Fotoğraf içerisinde istenilen bir değerde görüntü aranmaya başlanır ve aranan değer bulunduğunda belirlenen koordinata kameranın odaklanması sağlanır. Bu işlemler belirli bir algoritma çerçevesinde gerçekleşir. Sistemin çalışma hızı (tepki hızı) burada önemli bir parametredir ve tasarlanan algoritma bu aşamada önem arzeder. 
 OpenCV Kütüphanesi ile Görüntü İşleme
 Görüntü işleme için kullanılan en popüler kütüphanelerden birisi OpenCV kütüphanesidir. Bu çalışma kapsamındaki örneklerin tamamı Python dili ile yazılmış ve Visual Studio Code ide’si kullanılmıştır. Öncelikle kütüphaneler import edilir. Şekil 1 de Editör penceresi nin şekli görülmektedir
 .  
+
+![1](https://user-images.githubusercontent.com/56557278/140651556-ba4d9a0f-68f2-466c-a6c2-14e21dfde0a0.jpg)
                                                          Şekil 1   Editör Penceceresi
 
 
                                    
-Kameradan Görüntünün Alınması 
+##Kameradan Görüntünün Alınması 
 
 Kamera görüntüsünün opencv  içerisine alınması birkaç aşamadan ibarettir. Kamera daha önceden bilgisayara tanıtılmış olmalı başka bir deyişle driverlarının yüklenmiş olması gerekir. Bu sayede opencv kütüphanesi gerekli olan kamera bilgisine ulaşabilecektir. Kamera bilgisayara USB den bağlanabilir yada laptopunuzun kendi kamerası kullanılabilir çok önemli olmayan bir durumdur. OpenCV ile kameradan görüntü alabilmek için VideoCapture nesnesi oluşturulmalıdır. Bu nesneyi oluştururken parametre olarak cihaz indeksi ya da video dosyasının ismi gönderilir.
 
 
-Kamera
+##Kamera
 
 Cihaz indeksi kameranın numarasını belirten bir sayıdır. Normal durumda bir bilgisayar üzerinde bir kamera olacağını varsayarsak parametre olarak 0 gönderebiliriz. Eğer cihazda 2 kamera varsa ve 2.kameradan görüntü almak istiyorsak o zaman 1 yazılması yeterli olacaktır.
 Kameranın görüntüsünü almak için başlangıçta editöre şu komutlar yazılır.
@@ -39,9 +40,9 @@ cv2.imshow('Lazer Takip', frame)
 
 komutu kullanılacaktır. Programı yazarken hafızaya alınan verilerin değişkenlere atılması gerektiği unutulmamalıdır. Şekil 2 de alınan kamera görüntüsü gösterilmiştir. 
 
- 
-Şekil 2
-Görüntüden Resim Yakalama
+ ![2](https://user-images.githubusercontent.com/56557278/140651569-98d2509b-8ddc-414b-ba6f-838ffb33b3f2.jpg)
+                                  Şekil 2
+##Görüntüden Resim Yakalama
 
 Akıcı görüntü editör ekranına alındıktan sonra ara ara resimlerin alınması gerekir resim
 çekme aralıkları tamamen algoritmayla alakalıdır. While döngüsü içinde görüntün sürekli alınması gerekir. Resim yakalamak için ;
@@ -76,14 +77,14 @@ cv2.imshow('Lazer Takip', gray )
 cv2.imshow('Lazer Takip', hsvrenkdonusum )
 
 komutlarını kullanıyoruz. Resmin sayısal pixel değerlerini Debug modda görmemiz mümkünüdr. Bu sayede  resim üzerinde analiz yapma fırsatı elde ederiz. Bunu;
- 
+ ![3](https://user-images.githubusercontent.com/56557278/140651573-2157e577-af21-407e-9cbb-ead1ce8d7136.jpg)
 Şekil 3
 
 
 
 Debug Modda ekranın sol tarafında Şekil 3’de görüldüğü şekilde inceleyebiliriz. Örnek olarak Frame matrisinin renk değerlerini,shape ile matrisin boyutlarını,max ve min değerleri ile en büyük ve en düşük renk aralıklarını görmek mümkün.
 
-Resimden Pixel Değerlerinin Okuması 
+##Resimden Pixel Değerlerinin Okuması 
 
 Pixel değerlerinin her defasında kontrol edilmesi gereklidir çünkü aranan görüntünün nerde olduğu saptanacaktır. Bunun için öncelikle değerlerin resim içesinden okunup yer vektörünün oluşturulması gerekir. Pixel değerini ;
 
@@ -166,14 +167,14 @@ beyazNoktaSayisi=func(matris)
 Bu tasarımla resim içerisindeki tüm pixel değerleri elde edilebilir. Değer okundukdan sonra bir değişkende saklanır değeri görmek için değişkenin editör ekranına yazdırılması gerekir. 
 
 
-Resmin Analiz Edilmesi 
+##Resmin Analiz Edilmesi 
 
 Kameradan alınan görüntünün incelenmesi için analizin neye göre yapılacağına karar verilmesi önemli bir hususdur. Lazer takibi yapılan bu projede öncelikle lazerin zemin üzerinde bıraktığı iz analiz edilmiştir. Kameranın lazeri görmesi manuel olarak sağlanmış defalarca resim örneği alınmış ve renk değerleri kaydedilmiştir. Lazerin zemine veya kameranın lazer ve zemine olan uzaklıkları değerlendirilmiştir. Lazer ışığının ve ortam parlaklığının etkisinin çalışmayı büyük oranda etkilediği farkedilmiştir ve bu değerlerin belirli bir oranda olacağı düşünülerek tölerans değerleri uygun şekilde atanmıştır. Analiz python OpenCv kütüphanesi üzerinde yapılmıştır Şekil 4’de bir analiz örneği gösterilmektedir. 
-
+![3](https://user-images.githubusercontent.com/56557278/140651573-2157e577-af21-407e-9cbb-ead1ce8d7136.jpg)
  
 Şekil 4
 Matris üzerindeki beyaz renk piksellerinin daha iyi anlaşılması adına aşağıda benzer bir projenin matlab üzerinden alınmış ekran görüntüleri bulunmaktadır.
- 
+ ![5](https://user-images.githubusercontent.com/56557278/140651668-e126999b-e30b-44c2-9a2a-c175948bfa41.jpg)
 Şekil 5
 
 
@@ -181,7 +182,7 @@ Matris üzerindeki beyaz renk piksellerinin daha iyi anlaşılması adına aşa�
 
 
 
-
+![6](https://user-images.githubusercontent.com/56557278/140651670-a2040996-d9e6-491c-9daf-7c1dd863a185.jpg)
  
 Şekil 6
 
@@ -201,6 +202,7 @@ yapmamız gerekecek.
 
 
 
+![7](https://user-images.githubusercontent.com/56557278/140651672-139c923f-57fa-4feb-8f93-730aa6758a77.jpg)
 
 
  
@@ -224,7 +226,7 @@ Yazılım içersinde tolerans değerinin sorgulanmasını biz zaten fonksiyon i�
 
 if (matris[ax][bx]) >=250 or <=255:
 
-Nokta Takibi
+##Nokta Takibi
 
 Bu aşamaya kadar noktanın hangi konumda olduğu belirlenmiş oldu bundan sonraki aşama
 noktayı sürekli bir şekilde takip etmektir. Bu konuda bazı sıkıntılar yaşanmıyor değildir. Bu
@@ -317,12 +319,13 @@ Nokta böylelikle hızlı birşekilde saptanır ve konumu belirlenir ancak bazen
 Buraya kadar yapılanlar 1, 4, 7, 10, 13. pixel atlama şeklinde oluyordu ancak 2. veya 3. pixeller bağzı durumlarda işe yarayacaktır ve kullanılması gerekiyordur. Sistemin bu duruma cevap verebilmesi için Resim Kesme metoduna gidilmiştir.
 
 
-Resim Kesme Metodu (MATLAB KULLANANLAR İÇİN)
+##Resim Kesme Metodu (MATLAB KULLANANLAR İÇİN)
 
 
 İstenilen değerdeki nokta saptandıktan sonra döngüden çıkılır ve bulunan nokta etrafı 40X40 pixel boyutunda kesilir kesilme işlemi noktanın konumuna göre farklı haller almaktadır bu konuya daha sonra değineceğim. Sistemin hızı son durumda 192 kat artmıştır. (640*480) / (40*40) = 192 dir. Arama işlemine kesilen nokta içerisinde devam edilir ve bu işlem bir pixel atlayarak gerçekleşir böylelikle tüm değerler elde edilmiş olur, nokta bulunduğunda tekrar başa dönülüp küçük kare içi aranmaya devam edilir. Küçük kare içerisindeki noktanın olmadığına karar verildiğinde döngü sistemden çıkıp resmi baştan taramaya başlar. Bu olay devamlı kendini tekrar eder. Küçük karenin hareket kararının verilmesini sağlayan kodlar aşağıdadır
 
 
+![8](https://user-images.githubusercontent.com/56557278/140651675-612ac278-1914-4146-bcd7-ef4f0b2dc5d3.jpg)
  
 Şekil 8
 
@@ -378,7 +381,7 @@ Hareketli Çerçeve
 
 Hareketli nokta takibi başarıyla tamamlandı ve koordinat değerleri alınabildi bunlara ilaveten projeyi biraz görsel hale getirmek için lazer etrafına bir kare çizdirebilir ve bunu hareketlendirebiliriz. Şekil 9 da bir örneği verilmiştir.
 
- 
+ ![9](https://user-images.githubusercontent.com/56557278/140651678-7b620b8a-af9d-4d0c-91c0-bed555d24a13.jpg)
 Şekil 9
 
 
@@ -387,7 +390,7 @@ Hareketli nokta takibi başarıyla tamamlandı ve koordinat değerleri alınabil
 
 Hareketli çerçeve resmin her noktasına ulaşabilir özelliktedir yazılım bu mantıkta çalışır.
 
-Koordinat Noktaları
+##Koordinat Noktaları
 
 
 Hareketli nokta takibi yaparken ekran üzerinde takip noktalarını kontrol edebilmek amacıyla koordinat noktalarını yazmak proje açısından iyi bir detay.Detaylı örnek Şekil 10’da gösterilmiştir.Ekranın sol üst köşe noktalanarının x ve y koordinatlarının 0 olduğunu bilmek gerekir yanı ekranın sol üst köşesi 0,0 noktasıdır.Bunu yazdırmak adına puttext() fonksiyonu yeterli bir araçtır.
