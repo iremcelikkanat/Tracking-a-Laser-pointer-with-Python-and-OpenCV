@@ -8,6 +8,7 @@ Görüntü işleme için kullanılan en popüler kütüphanelerden birisi OpenCV
 .  
 
 ![1](https://user-images.githubusercontent.com/56557278/140651556-ba4d9a0f-68f2-466c-a6c2-14e21dfde0a0.jpg)
+
                                                          Şekil 1   Editör Penceceresi
 
 
@@ -41,8 +42,10 @@ cv2.imshow('Lazer Takip', frame)
 komutu kullanılacaktır. Programı yazarken hafızaya alınan verilerin değişkenlere atılması gerektiği unutulmamalıdır. Şekil 2 de alınan kamera görüntüsü gösterilmiştir. 
 
  ![2](https://user-images.githubusercontent.com/56557278/140651569-98d2509b-8ddc-414b-ba6f-838ffb33b3f2.jpg)
+ 
                                   Şekil 2
-##Görüntüden Resim Yakalama
+                                  
+## Görüntüden Resim Yakalama
 
 Akıcı görüntü editör ekranına alındıktan sonra ara ara resimlerin alınması gerekir resim
 çekme aralıkları tamamen algoritmayla alakalıdır. While döngüsü içinde görüntün sürekli alınması gerekir. Resim yakalamak için ;
@@ -78,13 +81,14 @@ cv2.imshow('Lazer Takip', hsvrenkdonusum )
 
 komutlarını kullanıyoruz. Resmin sayısal pixel değerlerini Debug modda görmemiz mümkünüdr. Bu sayede  resim üzerinde analiz yapma fırsatı elde ederiz. Bunu;
  ![3](https://user-images.githubusercontent.com/56557278/140651573-2157e577-af21-407e-9cbb-ead1ce8d7136.jpg)
+ 
 Şekil 3
 
 
 
 Debug Modda ekranın sol tarafında Şekil 3’de görüldüğü şekilde inceleyebiliriz. Örnek olarak Frame matrisinin renk değerlerini,shape ile matrisin boyutlarını,max ve min değerleri ile en büyük ve en düşük renk aralıklarını görmek mümkün.
 
-##Resimden Pixel Değerlerinin Okuması 
+## Resimden Pixel Değerlerinin Okuması 
 
 Pixel değerlerinin her defasında kontrol edilmesi gereklidir çünkü aranan görüntünün nerde olduğu saptanacaktır. Bunun için öncelikle değerlerin resim içesinden okunup yer vektörünün oluşturulması gerekir. Pixel değerini ;
 
